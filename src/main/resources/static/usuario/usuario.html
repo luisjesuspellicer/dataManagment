@@ -1,0 +1,87 @@
+<div class="container">
+    <div class="caption" style="text-align: center">  <h2>Datos usuario </h2></div>
+    <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3"
+         style="text-align: center">  <h4>Usuario </h4>
+        <input type="text"
+               name="userName2"
+               ng-model="usuarioCtrl.userName"
+               disabled
+               class="form-control">
+    </div>
+    <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3" style="text-align: center">  <h4>Nueva Contraseña </h4>
+        <input type="password"
+               name="password"
+               ng-model="usuarioCtrl.password"
+               ng-disabled="usuarioCtrl.cambiar()"
+               class="form-control">
+    </div>
+    <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3" style="text-align: center">  <h4>Repetir Nueva Contraseña </h4>
+        <input type="password"
+               name="password2"
+               ng-model="usuarioCtrl.password2"
+               ng-disabled="usuarioCtrl.cambiar()"
+               required class="form-control">
+    </div>
+
+    <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3" style="text-align: center">  <h4>Correo Electrónico </h4>
+        <input type="email"
+               name="email"
+               ng-disabled="usuarioCtrl.cambiar()"
+               ng-model="usuarioCtrl.email"
+               required class="form-control">
+    </div>
+    <div disabled="true" class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3" style="text-align: center">  <h4>Roles </h4>
+        <input type="text"
+               name="roles"
+               ng-model="usuarioCtrl.roles"
+               disabled
+               required class="form-control">
+    </div>
+
+
+    <div ng-if="usuarioCtrl.userNotAdmin() "
+         class="caption col-md-12"
+         style="text-align: center">
+        <br>
+        <div class="btn-group">
+            <button type="button"
+                    class="btn btn-primary"
+                    ng-disabled="usuarioCtrl.cambiar()"
+            >Añadir rol</button>
+            <button type="button"
+                    class="btn btn-primary dropdown-toggle"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    ng-disabled="usuarioCtrl.cambiar()">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+                <div ng-repeat="estudio in usuarioCtrl.estudios  track by $index">
+                    <li><a ng-click="usuarioCtrl.nuevoRol($index)">{{estudio.studyName}}</a></li>
+                </div>
+            </ul>
+        </div>
+        <button
+                class="btn btn-primary"
+                ng-click="usuarioCtrl.borrarRoles()"
+                ng-disabled="usuarioCtrl.cambiar()"
+        >Quitar todos los roles
+        </button>
+    </div>
+    <div class="caption col-md-12" style="text-align: center">
+        <br>
+        <button
+                class="btn btn-primary"
+                ng-click="usuarioCtrl.aplicarCambios()">{{usuarioCtrl.camb}}
+        </button>
+    </div>
+    <div class="caption col-md-12" style="text-align: center">
+        <br>
+        <button
+                class="btn btn-primary"
+                ng-click="usuarioCtrl.GuardarCambios()">Guardar cambios
+        </button>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="container">
+
+<div class="caption"
+     style="text-align: center">
+  <h2>Gestión Incidencias</h2>
+</div>
+<table class="table table-responsive table-bordered" style="max-width: 1240px; margin: auto;">
+  <tr>
+    <th></th>
+    <th>Fecha</th>
+    <th>Tipo de incidencia</th>
+    <th>Efectos y procedimientos</th>
+    <th>Usuario</th>
+
+  </tr>
+  <tr ng-repeat="incidencia in incidenciasCtrl.incidences">
+    <td>
+      <button class="btn btn-danger"
+              ng-click="incidenciasCtrl.delete(incidencia)">
+        <span class="glyphicon glyphicon-trash"></span>
+      </button>
+    </td>
+    <td>{{incidencia.date}}</td>
+    <td>{{incidencia.typeIncidence}}</td>
+    <td>{{incidencia.efectsAndProcedures}}</td>
+    <td style="color:CornflowerBlue;" >{{incidencia.user.userName}}</td>
+  </tr>
+</table>
+<br>
+    <div class="caption"
+         style="text-align: center">
+      <h3>Crear nueva incidencia</h3>
+    </div>
+
+    <div class="container">
+      <form name="registro" ng-submit="incidenciasCtrl.submit()">
+        <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3" style="text-align: center">  <h3>Tipo de incidencia </h3>
+          <input type="text" minlength="1" name="tipoIncidencia"  ng-model="incidenciasCtrl.tipoIncidencia" required class="form-control">
+        </div>
+        <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3" style="text-align: center">  <h3>Efectos y procedimientos </h3>
+          <input type="text"  minlength="1" name="efectos"  ng-model="incidenciasCtrl.efectos" required class="form-control">
+        </div>
+
+        <div class="caption col-md-12" style="text-align: center">
+          <br>
+          <button
+                  class="btn btn-primary"
+                  ng-click="incidenciasCtrl.crearIncidencia()"
+                  ng-disabled="registro.$invalid">
+            Crear incidencia
+          </button>
+
+        </div>
+      </form>
+    </div>
+</div>

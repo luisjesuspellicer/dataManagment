@@ -1,0 +1,784 @@
+<div class="container">
+
+    <!-- título  -->
+
+    <div class="row">
+        <div class="caption" style="text-align: center"><h2>Protocolo de registro </h2></div>
+    </div>
+    <br>
+
+    <!-- Formulario de registro -->
+    <form name="registro">
+        <ng-switch on="registroCtrl.mostrar">
+
+            <!-- DATOS DE IDENTIFICACIÓN -->
+            <ng-form name="identificacion">
+                <div ng-if="registroCtrl.mostrar == 0">
+                    <div class="row">
+                        <div class="caption" style="text-align: center">
+                            <h3>Datos de identificación </h3>
+                        </div>
+                        <div class="col-md-6 col-lt-6">
+                            <div class="caption" style="text-align: center"><h4>Código Personal</h4></div>
+                            <input type="text"
+                                   ng-model="registroCtrl.codigoPersonal"
+                                   class="form-control"
+                                   required
+                                   aria-label="...">
+
+                            <h4 class="text-center">Edad</h4>
+                            <input type="number"
+                                   ng-model="registroCtrl.edad"
+                                   required
+                                   min="0"
+                                   class="form-control"
+                                   aria-label="...">
+                            <br>
+
+                            <h4 class="text-center">Género</h4>
+                            <div>
+                                <div class="col-md-5 col-lt-5 col-md-offset-1">
+                                    <input
+                                            checked
+                                            required
+                                            type="radio"
+                                            name="genero"
+                                            ng-model="registroCtrl.genero"
+                                            value="Hombre"
+                                    > Hombre<br>
+                                </div>
+                                <div class="col-md-3 col-lt-3 col-lg-offset-2 col-md-offset-2">
+                                    <input
+                                            required
+                                            type="radio"
+                                            name="genero"
+                                            ng-model="registroCtrl.genero"
+                                            value="Mujer"
+                                            style="align: right"> Mujer<br>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 col-lt-6">
+                            <div class="caption" style="text-align: center"><h4>Dia</h4></div>
+                            <input type="date"
+                                   name="dia"
+                                   required
+                                   ng-model="registroCtrl.dia"
+                                   class="form-control"
+                                   min="2014-01-01"
+                                   aria-label="...">
+
+                            <h4 class="text-center">Hora</h4>
+                            <input type="time"
+                                   name="hour"
+                                   required
+                                   ng-model="registroCtrl.hora"
+                                   class="form-control"
+                                   aria-label="...">
+                            <br>
+
+                            <h4 class="text-center">Dispositivo</h4>
+
+                            <input type="text"
+                                   class="form-control"
+                                   ng-model="registroCtrl.dispositivo"
+                                   aria-label="...">
+                            <br>
+                        </div>
+                        <h4 class="text-center">Balanceado</h4>
+                        <input type="text"
+                               class="form-control"
+                               ng-model="registroCtrl.balanceado"
+                               aria-label="...">
+                        <br>
+                        <!-- Boton -->
+                        <div style="text-align:center;">
+                            <button
+                                    class="btn btn-primary"
+                                    ng-click="registroCtrl.datosFisiologicos()"
+                                    ng-disabled="registro.identificacion.$invalid"
+                            >Datos Fisiológicos
+
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </ng-form>
+
+            <!--  DATOS FISIOLÓGICOS -->
+            <ng-form name="datosFisiologicos">
+                <div ng-if="registroCtrl.mostrar == 1">
+                    <div class="row">
+                        <div class="caption" style="text-align: center">
+                            <h3>Datos Fisiológicos </h3>
+                        </div>
+                        <br>
+                        <div class="col-md-6 col-lt-6">
+
+                            <!-- Columna de la izquierda -->
+                            <!-- ALTURA -->
+
+                            <div class="caption" style="text-align: center"><h4>Altura (cm)</h4></div>
+                            <input type="number"
+                                   required
+                                   ng-model="registroCtrl.altura"
+                                   min="0"
+                                   max="280"
+                                   class="form-control"
+                                   aria-label="...">
+                            <br>
+                            <!-- PESO -->
+
+                            <h4 class="text-center">Peso (Kg)</h4>
+                            <input type="number"
+                                   required
+                                   min="0"
+                                   max="600"
+                                   ng-model="registroCtrl.peso"
+                                   class="form-control"
+                                   aria-label="...">
+                            <br>
+                            <!-- MEDICACIÓN -->
+                            <h4 class="text-center">Medicación</h4>
+
+                            <div class="col-xs-3 col-sm-5 col-md-5 col-lt-5 col-md-offset-1 col-lt-offset-1 col-sm-offset-1">
+                                <input type="radio"
+                                       name="medicacion"
+                                       ng-model="registroCtrl.tomaMedicacion"
+                                       value="Si"
+                                > Si<br>
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lt-3 col-lg-offset-2 col-md-offset-3 col-sm-offset-3">
+                                <input type="radio"
+                                       name="medicacion"
+                                       value="No"
+                                       ng-model="registroCtrl.tomaMedicacion"
+                                       style="align: right"
+
+                                > No<br>
+                            </div>
+                            <br>
+                            <br>
+                            <!-- PAUTAS MEDICACIÓN -->
+
+                            <h4 class="text-center">Pautas de medicación</h4>
+                            <input type="text"
+                                   ng-model="registroCtrl.pautasMedicacion"
+                                   ng-disabled="registroCtrl.pedirPautas()"
+                                   minlength="1"
+                                   ng-required="!registroCtrl.pedirPautas()"
+                                   class="form-control"
+                                   aria-label="...">
+                            <br>
+                            <!-- MENSTRUACIÓN -->
+
+                            <h4 class="text-center">Menstruación</h4>
+
+                            <div class="col-sm-5 col-md-5 col-lt-5 col-md-offset-1 col-lt-offset-1 col-sm-offset-1">
+                                <input type="radio"
+                                       name="Menstruacion"
+                                       value="Si"
+                                       ng-required="!registroCtrl.esHombre()"
+                                       ng-model="registroCtrl.menstruacion"
+                                       ng-disabled="registroCtrl.esHombre()"> Si<br>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lt-3 col-lg-offset-2 col-md-offset-3 col-sm-offset-3">
+                                <input type="radio"
+                                       name="Menstruacion"
+                                       value="No"
+                                       ng-model="registroCtrl.menstruacion"
+                                       ng-required="!registroCtrl.esHombre()"
+                                       ng-disabled="registroCtrl.esHombre()"
+                                       checked
+                                       style="align: right"> No<br>
+                            </div>
+                            <br>
+                            <!-- MENSTRUACIÓN  DOLOROSA-->
+                            <h4 class="text-center">Menstruación dolorosa</h4>
+
+                            <div class="col-sm-5 col-md-5 col-lt-5 col-md-offset-1 col-lt-offset-1 col-sm-offset-1">
+                                <input
+                                        type="radio"
+                                        name="Dolormenstruacion"
+                                        value="Si"
+                                        checked
+                                        ng-model="registroCtrl.menstruacionDolorosa"
+                                        ng-disabled="registroCtrl.esHombre()"
+                                > Si<br>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lt-3 col-lg-offset-2 col-md-offset-3 col-sm-offset-3">
+                                <input
+                                        type="radio"
+                                        name="Dolormenstruacion"
+                                        value="No"
+                                        style="align: right"
+                                        ng-model="registroCtrl.menstruacionDolorosa"
+                                        ng-disabled="registroCtrl.esHombre()"
+                                > No<br>
+                            </div>
+                            <br>
+                            <br>
+                            <!-- TRATAMIENTO MENSTRUACIÓN-->
+                            <h4 class="text-center">Tratamiento menstruación</h4>
+                            <input type="text"
+                                   ng-model="registroCtrl.tratamientoMenstruacion"
+                                   ng-disabled="registroCtrl.esHombre()"
+                                   class="form-control"
+                                   aria-label="...">
+                            <br>
+                        </div> <!-- Fin columna izquierda -->
+
+                        <!-- Columna Derecha -->
+
+                        <!-- PULSACIONES -->
+                        <div class="col-md-6 col-lt-6">
+                            <div class="caption" style="text-align: center"><h4>Pulsaciones</h4></div>
+                            <div style="text-align:center;">
+                                <input type="number"
+                                       ng-model="registroCtrl.pulsaciones"
+                                       required
+                                       min="0"
+                                       name="pulsaciones"
+                                       class="form-control">
+                            </div>
+                            <br>
+                            <!-- Presión Arterial -->
+                            <h4 class="text-center">Presión Arterial</h4>
+                            <input type="number"
+                                   ng-model="registroCtrl.presionArterial"
+                                   required
+                                   min="0"
+                                   name="presionArterial"
+                                   class="form-control">
+                            <br>
+                            <br>
+                            <!-- DIFICULTADES SENSORIALES -->
+                            <h4 class="text-center">Dificultades sensoriales (vista y oído)</h4>
+
+                            <div class="col-sm-5 col-md-5 col-lt-5 col-md-offset-1 col-lt-offset-1 col-sm-offset-1">
+                                <input type="radio"
+                                       name="DificultadSensorial"
+                                       value="Si"
+                                       ng-model="registroCtrl.dificultadSensorial"
+                                       required
+                                       checked> Si<br>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lt-3 col-lg-offset-2 col-md-offset-3 col-sm-offset-3">
+                                <input type="radio"
+                                       ng-model="registroCtrl.dificultadSensorial"
+                                       name="DificultadSensorial"
+                                       value="No"
+                                       required
+                                       style="align: right"> No<br>
+                            </div>
+                            <br>
+                            <!-- Descripción de la dificultad sensorial -->
+                            <h4 class="text-center">Descripción de la dificultad sensorial</h4>
+                            <input type="text" name="descripcionDificultadSensorial"
+                                   ng-model="registroCtrl.descripcionDificultadSensorial"
+                                   ng-disabled="!registroCtrl.tieneDificultadesSensoriales()"
+                                   ng-required="registroCtrl.tieneDificultadesSensoriales()"
+                                   class="form-control">
+                            <br>
+                            <!-- DOLOR  -->
+                            <h4 class="text-center">¿Siente dolor?</h4>
+
+                            <div class="col-sm-5 col-md-5 col-lt-5 col-md-offset-1 col-lt-offset-1 col-sm-offset-1">
+                                <input type="radio"
+                                       name="Dolor"
+                                       value="Si"
+                                       ng-model="registroCtrl.dolor"
+                                       required
+                                       checked> Si<br>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lt-3 col-lg-offset-2 col-md-offset-3 col-sm-offset-3">
+                                <input type="radio"
+                                       name="Dolor"
+                                       value="No"
+                                       ng-model="registroCtrl.dolor"
+                                       required
+                                       style="align: right"> No<br>
+                            </div>
+                            <br>
+                            <!-- Periodo dolor-->
+                            <h4 class="text-center">Periodo dolor</h4>
+
+                            <div class="col-sm-1 col-md-3 col-lt-2 col-md-offset-1">
+                                <input type="radio"
+                                       name="PeriodoDolor"
+                                       value="M"
+                                       checked ng-model="registroCtrl.periodoDolor"
+                                       ng-required="registroCtrl.tieneDolor()"
+                                       ng-disabled="!registroCtrl.tieneDolor()"> M
+                            </div>
+                            <div class="col-sm-1 col-md-3 col-lt-2 col-md-offset-1">
+                                <input type="radio" checked
+                                       ng-model="registroCtrl.periodoDolor"
+                                       ng-required="registroCtrl.tieneDolor()"
+                                       ng-disabled="!registroCtrl.tieneDolor()"
+                                       name="PeriodoDolor" value="T"> T
+                            </div>
+                            <div class="col-sm-1 col-md-3 col-lt-2 col-md-offset-1">
+                                <input type="radio"
+                                       name="PeriodoDolor"
+                                       ng-model="registroCtrl.periodoDolor"
+                                       ng-required="registroCtrl.tieneDolor()"
+                                       ng-disabled="!registroCtrl.tieneDolor()"
+                                       value="N"> N
+                            </div>
+                            <br>
+                            <br>
+                            <!-- Zona de dolor-->
+                            <h4 class="text-center">Descripción (zona de dolor)</h4>
+                            <input type="text"
+                                   class="form-control"
+                                   ng-model="registroCtrl.descripcionZonaDolor"
+                                   ng-required="registroCtrl.tieneDolor()"
+                                   ng-disabled="!registroCtrl.tieneDolor()"
+                                   aria-label="...">
+                            <br>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lt-12">
+                            <h4 class="text-center">¿Cuánto dolor siente? [0-10]</h4>
+                            <input type="number"
+                                   class="form-control"
+                                   ng-required="registroCtrl.tieneDolor()"
+                                   ng-disabled="!registroCtrl.tieneDolor()"
+                                   ng-model="registroCtrl.cantidadDolor"
+                                   min="0"
+                                   max="10"
+                                   aria-label="...">
+                            <br>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12 col-lt-12">
+                            <h4 class="text-center">Como se siente de salud [0-10]</h4>
+                            <input type="number"
+                                   class="form-control"
+                                   ng-model="registroCtrl.sentimientoSalud"
+                                   min="0"
+                                   required
+                                   max="10"
+                                   aria-label="...">
+                            <br>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lt-12">
+                            <h4 class="text-center">¿Qué molestias tiene?</h4>
+
+                            <input type="text"
+                                   class="form-control"
+                                   ng-model="registroCtrl.molestias"
+                                   aria-label="...">
+                            <br>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lt-12">
+                            <div style="text-align:center;">
+                                <button
+                                        class="btn btn-primary"
+                                        ng-click="registroCtrl.habitosToxicos()"
+                                        ng-disabled="registro.datosFisiologicos.$invalid"> Hábitos Tóxicos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-form>
+
+            <!--  HABITOS TOXICOS -->
+
+            <ng-form name="datosHabitosToxicos">
+                <div ng-if="registroCtrl.mostrar == 2">
+
+                    <div class="row">
+                        <div class="caption" style="text-align: center"><h3>Hábitos Tóxicos </h3></div>
+                        <div class="col-md-6 col-lt-6">
+
+                            <!-- fUMADOR -->
+                            <h4 class="text-center">Fumador</h4>
+
+                            <div class="col-sm-5 col-md-5 col-lt-5 col-md-offset-1 col-lt-offset-1 col-sm-offset-1">
+                                <input type="radio" name="Fumador" value="Si"
+                                       ng-model="registroCtrl.fumador"
+                                       required
+                                       checked> Si<br>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lt-3 col-lg-offset-2 col-md-offset-3 col-sm-offset-3">
+                                <input type="radio" name="Fumador" ng-model="registroCtrl.fumador"
+                                       required value="No" style="align: right"> No<br>
+                            </div>
+                            <br><br>
+                            <!-- Numero Cigarrillos -->
+                            <h4 class="text-center">Cigarrillos/día</h4>
+                            <input type="number" ng-model="registroCtrl.cigarrillosDia"
+                                   ng-disabled="!registroCtrl.esFumador()"
+                                   ng-required="registroCtrl.esFumador()"
+                                   name="cigarrillosDia"
+                                   min="0"
+                                   class="form-control">
+                            <br>
+
+
+                            <!-- OTRAS SUSTANCIAS -->
+                            <h4 class="text-center">Consumo de otras sustancias</h4>
+
+                            <div class="col-sm-5 col-md-5 col-lt-5 col-md-offset-1 col-lt-offset-1 col-sm-offset-1">
+                                <input type="radio" name="OtrasSustancias"
+                                       ng-model="registroCtrl.consumoOtrasSustancias"
+                                       required value="Si" checked> Si<br>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lt-3 col-lg-offset-2 col-md-offset-3 col-sm-offset-3">
+                                <input type="radio"
+                                       ng-model="registroCtrl.consumoOtrasSustancias"
+                                       required
+                                       name="OtrasSustancias"
+                                       value="No" style="align: right"> No<br>
+                            </div>
+                            <br><br>
+                            <!-- Cantidad día (Gramos -->
+                            <h4 class="text-center">Gramos/día</h4>
+                            <input type="number" ng-model="registroCtrl.gramosDiaOtrasSustancias"
+                                   ng-disabled="!registroCtrl.consumeOtrasSustancias()"
+                                   name="gramosDia"
+                                   ng-required="registroCtrl.consumeOtrasSustancias()"
+                                   class="form-control">
+                            <br>
+                            <br>
+
+                        </div>
+                        <div class="col-md-6 col-lt-6">
+                            <!-- BEBIDAS ALCOHOLICAS -->
+                            <h4 class="text-center">Consumo de bebidas alcohólicas</h4>
+
+                            <div class="col-sm-5 col-md-5 col-lt-5 col-md-offset-1 col-lt-offset-1 col-sm-offset-1">
+                                <input type="radio"
+                                       name="BebidasAlcoholicas"
+                                       value="Si" ng-model="registroCtrl.bebidasAlcoholicas" required checked> Si<br>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lt-3 col-lg-offset-2 col-md-offset-3 col-sm-offset-3">
+                                <input type="radio" name="BebidasAlcoholicas"
+                                       ng-model="registroCtrl.bebidasAlcoholicas" required
+                                       value="No" style="align: right"> No<br>
+                            </div>
+                            <br>
+                            <br>
+                            <!-- Cantidad día (Litros -->
+                            <h4 class="text-center">Litros/día de bebidas alcohólicas</h4>
+                            <input type="number"
+                                   ng-model="registroCtrl.litrosDiaBebidaAlcoholica"
+                                   ng-disabled="!registroCtrl.consumeAlcohol()"
+                                   ng-required="registroCtrl.consumeAlcohol()"
+                                   min="0"
+                                   name="LitrosDiaBebidaAlcoholica"
+                                   class="form-control">
+                            <br>
+                        </div>
+                        <br>
+                        <div class="col-sm-12 col-md-12 col-lt-12">
+                            <div style="text-align:center;">
+                                <button
+                                        class="btn btn-primary"
+                                        ng-click="registroCtrl.otrosHabitos()"
+                                        ng-disabled="registro.datosHabitosToxicos.$invalid"> Otros Hábitos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-form>
+
+            <!--  OTROS HÁBITOS  -->
+            <ng-form name="datosOtrosHabitos">
+                <div ng-if="registroCtrl.mostrar == 3">
+                    <div class="row">
+                        <!-- Columna Izquierda -->
+                        <div class="caption col-md-12 col-lt-12" style="text-align: center"><h3>Otros Hábitos </h3>
+                        </div>
+                        <div class="col-md-6 col-lt-6">
+                            <h4 class="text-center">Consumo de cafeína</h4>
+                            <div class="col-sm-5 col-md-5 col-lt-5 col-md-offset-1 col-lt-offset-1 col-sm-offset-1">
+                                <input type="radio" ng-model="registroCtrl.cafeina" required name="Cafeina" value="Si"
+                                       checked> Si<br>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lt-3 col-lg-offset-2 col-md-offset-3 col-sm-offset-3">
+                                <input type="radio" name="Cafeina" ng-model="registroCtrl.cafeina" required value="No"
+                                       style="align: right"> No<br>
+                            </div>
+                            <br><br>
+                            <!-- Cantidad día (Litros -->
+                            <h4 class="text-center">Gramos/día de cafeína</h4>
+                            <input type="number"
+                                   ng-model="registroCtrl.cantidadCafeina"
+                                   min="0"
+                                   ng-disabled="!registroCtrl.consumeCafeina()"
+                                   ng-required="registroCtrl.consumeCafeina()" name="GramosDiaCafeina"
+                                   class="form-control">
+                            <br>
+                        </div>
+
+                        <!-- Columna derecha -->
+                        <div class="col-md-6 col-lt-6">
+
+
+                            <h4 class="text-center">Consumo de bebidas con gas</h4>
+                            <div class="col-sm-5 col-md-5 col-lt-5 col-md-offset-1 col-lt-offset-1 col-sm-offset-1">
+                                <input type="radio"
+                                       ng-model="registroCtrl.bebidasConGas"
+                                       required
+                                       name="BebidaGas" value="Si" checked> Si<br>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lt-3 col-lg-offset-2 col-md-offset-3 col-sm-offset-3">
+                                <input type="radio"
+                                       ng-model="registroCtrl.bebidasConGas"
+                                       required
+                                       name="BebidaGas" value="No" style="align: right"> No<br>
+                            </div>
+                            <br><br>
+                            <!-- Cantidad día (Litros -->
+                            <h4 class="text-center">Litros/día de bebidas con gas</h4>
+                            <input type="number"
+                                   ng-model="registroCtrl.cantidadBebidaConGas"
+                                   min="0"
+                                   ng-disabled="!registroCtrl.consumeBebidaConGas()"
+                                   ng-required="registroCtrl.consumeBebidaConGas()"
+                                   name="LitrosBebidaGas"
+                                   class="form-control">
+                            <br>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lt-12">
+                            <h4 class="text-center">¿Ha consumido tabaco, alcohol, café o bebidas con gas en las últimas
+                                4 horas?</h4>
+                            <div class="col-sm-5 col-md-5 col-lt-5 col-md-offset-1 col-lt-offset-1 col-sm-offset-1">
+                                <input type="radio"
+                                       ng-model="registroCtrl.consumidoUltimasHoras"
+                                       required
+                                       name="UltimasCuatroHoras" value="Si" checked> Si<br>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lt-3 col-lg-offset-2 col-md-offset-3 col-sm-offset-3">
+                                <input type="radio"
+                                       ng-model="registroCtrl.consumidoUltimasHoras"
+                                       required
+                                       name="UltimasCuatroHoras" value="No" style="align: right"> No<br>
+                            </div>
+                            <br><br>
+                            <!-- Cantidad día (Litros -->
+                            <h4 class="text-center">Tipo de consumición</h4>
+                            <input type="text" name="Tipo"
+                                   ng-model="registroCtrl.tipoConsumicion"
+                                   ng-disabled="!registroCtrl.haConsumidoUltimasHoras()"
+                                   ng-required="registroCtrl.haConsumidoUltimasHoras()"
+                                   class="form-control">
+                            <br>
+                        </div>
+                        <!-- Columna Izquierda -->
+                        <div class="col-md-6 col-lt-6">
+
+                            <h4 class="text-center">Practica deporte</h4>
+                            <div class="col-sm-5 col-md-5 col-lt-5 col-md-offset-1 col-lt-offset-1 col-sm-offset-1">
+                                <input type="radio" required
+                                       ng-model="registroCtrl.deporte" name="Deporte" value="Si" checked> Si<br>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lt-3 col-lg-offset-2 col-md-offset-3 col-sm-offset-3">
+                                <input type="radio" name="Deporte" required
+                                       ng-model="registroCtrl.deporte" value="No" style="align: right"> No<br>
+                            </div>
+                            <br><br>
+                            <!-- Cantidad día (Litros -->
+                            <h4 class="text-center">Tipo de deporte</h4>
+                            <input type="text" ng-model="registroCtrl.tipoDeporte"
+                                   ng-required="registroCtrl.haceDeporte()"
+                                   ng-disabled="!registroCtrl.haceDeporte()"
+                                   name="TipoDeporte"
+                                   class="form-control">
+                            <br>
+                            <h4 class="text-center">Veces que practica deporte a la semana</h4>
+                            <input type="number"
+                                   ng-model="registroCtrl.numDeporteSemanal"
+                                   ng-required="registroCtrl.haceDeporte()"
+                                   min="0"
+                                   ng-disabled="!registroCtrl.haceDeporte()"
+                                   name="NumDeporteSemanal"
+                                   class="form-control">
+                            <br>
+                        </div>
+                        <!-- Columna derecha -->
+                        <div class="col-md-6 col-lt-6">
+
+                            <h4 class="text-center">Específico. Practica submarinismo</h4>
+                            <div class="col-sm-5 col-md-5 col-lt-5 col-md-offset-1 col-lt-offset-1 col-sm-offset-1">
+                                <input type="radio"
+                                       ng-model="registroCtrl.submarinismo"
+                                       required name="Submarinismo" value="Si" checked> Si<br>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lt-3 col-lg-offset-2 col-md-offset-3 col-sm-offset-3">
+                                <input type="radio" ng-model="registroCtrl.submarinismo"
+                                       required name="Submarinismo" value="No" style="align: right"> No<br>
+                            </div>
+                            <br><br>
+                            <!-- Cantidad día (Litros -->
+                            <h4 class="text-center">Años experiencia</h4>
+                            <input type="number" name="ExperienciaSubmarinismo"
+                                   ng-model="registroCtrl.experienciaSubmarinismo"
+                                   min="0"
+                                   ng-required="registroCtrl.haceSubmarinismo()"
+                                   ng-disabled="!registroCtrl.haceSubmarinismo()" class="form-control">
+                            <br>
+                            <h4 class="text-center">Inmersiones al año </h4>
+                            <br>
+                            <input type="number" name="NumeroInmersiones"
+                                   ng-model="registroCtrl.inmersionesAnuales"
+                                   ng-required="registroCtrl.haceSubmarinismo()"
+                                   ng-disabled="!registroCtrl.haceSubmarinismo()"
+                                   min="0"
+                                   class="form-control">
+                            <br>
+                        </div>
+                        <!-- div vacio para poder hacerla responsive y que en los móviles este en orden -->
+                        <div class="col-sm-12 col-md-12 col-lt-12">
+                        </div>
+                        <!-- SUEÑO -->
+                        <div class="col-md-6 col-lt-6">
+
+                            <h4 class="text-center">Horas de sueño</h4>
+                            <input type="number" name="HorasSueno"
+                                   min="0"
+                                   ng-model="registroCtrl.horasSueno"
+                                   required
+                                   class="form-control">
+                            <br>
+
+                        </div>
+                        <div class="col-md-6 col-lt-6">
+
+                            <h4 class="text-center">Horas de sueño reparador</h4>
+                            <input type="number" name="HorasSuenoReparador"
+                                   ng-model="registroCtrl.horasSuenoReparador"
+                                   class="form-control">
+                            <br>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lt-12">
+                            <h4 class="text-center">Dificultades para dormir</h4>
+                            <div class="col-sm-5 col-md-5 col-lt-5 col-md-offset-1 col-lt-offset-1 col-sm-offset-1">
+                                <input type="radio" required ng-model="registroCtrl.dificultadParaDormir"
+                                       name="ProblemasDormir" value="Si" checked> Si<br>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lt-3 col-lg-offset-2 col-md-offset-3 col-sm-offset-3">
+                                <input type="radio" name="ProblemasDormir"
+                                       required ng-model="registroCtrl.dificultadParaDormir"
+                                       value="No" style="align: right"> No<br>
+                            </div>
+                            <br><br>
+                            <h4 class="text-center">¿Cuáles?</h4>
+                            <input type="text" name="Dificultades"
+                                   ng-model="registroCtrl.dificultadesDormir"
+                                   ng-required="registroCtrl.tieneDificultadesParaDormir()"
+                                   ng-minlength="0"
+                                   ng-disabled="!registroCtrl.tieneDificultadesParaDormir()"
+                                   class="form-control">
+                            <br>
+                            <h4 class="text-center">Tratamiento para los problemas de sueño</h4>
+                            <input type="text"
+                                   ng-model="registroCtrl.tratamientoProblemasSueno"
+                                   ng-disabled="!registroCtrl.tieneDificultadesParaDormir()"
+                                   name="TratamientoSueno"
+                                   class="form-control">
+                            <br>
+                            <div style="text-align:center;">
+                                <button
+                                        class="btn btn-primary"
+                                        ng-click="registroCtrl.datosPsicologicos()"
+                                        ng-disabled="registro.datosOtrosHabitos.$invalid">Datos Psicológicos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-form>
+
+            <!-- DATOS PSICÓLOGICOS  -->
+            <ng-form name="datosPsicologicos">
+                <div ng-if="registroCtrl.mostrar == 4">
+                    <div class="row">
+                        <div class="caption col-md-12 col-lt-12" style="text-align: center"><h3>Datos Psicológicos
+                            (antecedentes) </h3></div>
+                        <div class="col-md-6 col-lt-6">
+
+                            <h4 class="text-center">Ha sufrido episodios de ansiedad</h4>
+                            <br>
+                            <div class="col-sm-5 col-md-5 col-lt-5 col-md-offset-1 col-lt-offset-1 col-sm-offset-1">
+                                <input type="radio" ng-model="registroCtrl.ansiedad" name="Ansiedad" required value="Si"
+                                       checked> Si<br>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lt-3 col-lg-offset-2 col-md-offset-3 col-sm-offset-3">
+                                <input type="radio" name="Ansiedad" ng-model="registroCtrl.ansiedad" required value="No"
+                                       style="align: right"> No<br>
+                            </div>
+                            <br><br>
+                            <!-- Cantidad día (Litros -->
+                            <h4 class="text-center">Valoración del estado actual <br>[0 como siempre, 10 muy cambiado]
+                            </h4>
+                            <br>
+                            <input type="number" name="EstadoActual"
+                                   min="0"
+                                   max="10"
+                                   ng-model="registroCtrl.estadoActual" required class="form-control">
+                            <br>
+                        </div>
+
+                        <!-- Columna derecha -->
+                        <div class="col-md-6 col-lt-6">
+
+                            <h4 class="text-center">Ha sufrido algún episodio de estado de ánimo bajo</h4>
+                            <div class="col-sm-5 col-md-5 col-lt-5 col-md-offset-1 col-lt-offset-1 col-sm-offset-1">
+                                <input type="radio" ng-model="registroCtrl.animoBajo" required name="AnimoBajo"
+                                       value="Si" checked> Si<br>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lt-3 col-lg-offset-2 col-md-offset-3 col-sm-offset-3">
+                                <input type="radio" ng-model="registroCtrl.animoBajo" required name="AnimoBajo"
+                                       value="No" style="align: right"> No<br>
+                            </div>
+                            <br><br>
+                            <!-- Cantidad día (Litros -->
+                            <h4 class="text-center">Nervios actuales <br>[0 muy tranquilo, 10 nervioso, tenso, con
+                                palpitaciones]</h4>
+                            <input type="number" name="Nervios"
+                                   min="0"
+                                   max="10"
+                                   ng-model="registroCtrl.nerviosActuales" required
+                                   class="form-control">
+                            <br>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lt-12">
+                            <h4 class="text-center">Se siente tranquilo <br>[0 muy tranquilo, 10 totalmente intranquilo]
+                            </h4>
+                            <input type="number"
+                                   min="0"
+                                   max="10"
+                                   ng-model="registroCtrl.sentimientoTranquilidad" name="Tranquilidad"
+                                   class="form-control">
+                            <br>
+                            <div style="text-align:center;">
+                                <button
+                                        class="btn btn-primary"
+                                        ng-click="registroCtrl.datosIdentificacion()">Volver a identificacion
+                                </button>
+                                <br>
+                                <br>
+                            </div>
+                            <div style="text-align:center;">
+                                <spinner class="custom-spinner" name="loadingSpinner" img-src="spinner.gif"></spinner>
+                            </div>
+                            <div style="text-align:center;" ng-if="!registroCtrl.dis">
+                                <button
+                                        class="btn btn-primary"
+                                        ng-click="registroCtrl.submit()"
+                                        ng-disabled="registro.datosPsicologicos.$invalid">Enviar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-form>
+        </ng-switch>
+    </form>
+</div>

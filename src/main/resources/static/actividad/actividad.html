@@ -1,0 +1,60 @@
+<div class="container">
+
+    <div class="caption"
+         style="text-align: center">
+        <h2>Actividades</h2>
+    </div>
+    <table class="table table-responsive table-bordered" style="max-width: 1240px; margin: auto;">
+        <tr>
+            <th></th>
+            <th>Tipo de actividad</th>
+            <th>Descripción</th>
+        </tr>
+        <tr ng-repeat="actividad in actividadCtrl.actividades">
+            <td>
+                <button class="btn btn-danger"
+                        ng-click="actividadCtrl.deletee(actividad)">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+            </td>
+            <td>{{actividad.typeActivity}}</td>
+            <td>{{actividad.description}}</td>
+        </tr>
+    </table>
+    <br>
+    <div class="container">
+        <div class="caption" style="text-align: center"><h3>Crear nueva actividad</h3></div>
+        <div class="caption" style="text-align: center"><h4>Tipo de actividad</h4></div>
+        <div class="caption" style="text-align: center">
+            <input type="textarea"
+                   ng-model="actividadCtrl.tipoActividad"
+                   class="form-control"
+                   required
+                   ng-min-length="1"
+                   aria-label="...">
+
+            <h4 class="text-center">Descripción de la actividad</h4>
+            <input type="textarea"
+                   ng-model="actividadCtrl.descripcion"
+                   required
+                   ng-min-length="1"
+                   class="form-control"
+                   aria-label="...">
+            <br>
+            <div class="caption" style="text-align: center">
+                <button type="button" class="btn btn-primary"
+                        ng-click="actividadCtrl.crearActividad()"
+                        >Crear
+                </button>
+            </div>
+            <div class="caption" style="text-align: center">
+                <br>
+
+                <button type="button" class="btn btn-primary"
+                        ng-click="actividadCtrl.menu()"
+                >Menu Principal
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

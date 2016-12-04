@@ -1,0 +1,106 @@
+<div class="container">
+
+    <div class="caption"
+         style="text-align: center">
+        <h3>Resolución del test</h3>
+    </div>
+    <table class="table table-responsive table-bordered" style="max-width: 1240px; margin: auto;">
+        <tr>
+            <th>Serie</th>
+            <th colspan="2">Nº</th>
+            <th colspan="2">Letras</th>
+            <th colspan="2">Total</th>
+            <th colspan="2">Puntuacion</th>
+        </tr>
+        <tr ng-repeat="serie in testCognitivoResultadoCtrl.series track by $index">
+
+            <td>{{serie.sequence}}</td>
+            <td>{{serie.numberOfNumbers}}</td>
+            <td>{{testCognitivoResultadoCtrl.N[$index]}}</td>
+            <td>{{serie.numberOfLetters}}</td>
+            <td>{{testCognitivoResultadoCtrl.L[$index]}}</td>
+            <td>{{serie.total}}</td>
+            <td>{{testCognitivoResultadoCtrl.T[$index]}}</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <br>
+
+    <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3"
+    style="text-align: center">
+        <h3>Respuestas al Test</h3>
+    </div>
+    <div class="container">
+        <form name="registro">
+            <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3"
+                 style="text-align: center">
+                <h3>Secuencia: {{testCognitivoResultadoCtrl.actual()}}</h3>
+            </div>
+
+            <div class="caption col-md-6 col-lg-6"
+                 style="text-align: center">
+                <div>
+                    <br><h4>Nº</h4>
+                </div>
+                <div>
+                    <br><input
+                        type="number"
+                        min="0"
+                        name="number"
+                        minlength="1"
+                        ng-model="testCognitivoResultadoCtrl.N[testCognitivoResultadoCtrl.indice]"
+                        required class="form-control">
+                </div>
+            </div>
+            <div class="caption col-md-6 col-lg-6"
+                 style="text-align: center">
+                <div>
+                    <br><h4>Letras</h4>
+                </div>
+            </div>
+            <div class="caption col-md-6 col-lg-6"
+                 style="text-align: center">
+
+            </div>
+            <div class="caption col-md-6 col-lg-6 "
+                 style="text-align: center">
+                <div>
+                    <br><input
+                        type="number"
+                        min="0"
+                        name="letter"
+                        minlength="1"
+                        ng-model="testCognitivoResultadoCtrl.L[testCognitivoResultadoCtrl.indice]"
+                        required class="form-control">
+                </div>
+            </div>
+            <div class="caption col-md-12" style="text-align: center">
+                <br>
+                <button
+                        class="btn btn-primary"
+                        ng-disabled="registro.$invalid"
+                        ng-click="testCognitivoResultadoCtrl.siguienteSerie()"
+                >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Siguiente serie
+                </button>
+
+            </div>
+
+
+            <div class="caption col-md-12" style="text-align: center">
+                <br>
+                <button
+                        ng-disabled="!testCognitivoResultadoCtrl.fin()"
+                        class="btn btn-primary"
+                        ng-click="testCognitivoResultadoCtrl.enviar()"
+                >
+                    <span class="glyphicon glyphicon-ok"></span>
+                    Finalizar Test
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>

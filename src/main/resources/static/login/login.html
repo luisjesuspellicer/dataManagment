@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="caption" style="text-align: center">  <h2>{{loginCtrl.crear}} </h2></div>
+  <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3" style="text-align: center">  <h3>Usuario </h3>
+  <input type="text"  name="userName" ng-model="loginCtrl.userName" required class="form-control">
+  </div>
+  <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3" style="text-align: center">  <h3>Contraseña </h3>
+    <input type="password"  name="password" ng-model="loginCtrl.password" required class="form-control">
+  </div>
+  <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3" style="text-align: center">  <h3>Correo Electrónico </h3>
+    <input type="email"  name="email" ng-model="loginCtrl.email" required class="form-control">
+  </div>
+
+  <div class="caption col-md-12" style="text-align: center">
+    <br>
+    <button
+      class="btn btn-primary"
+      ng-click="loginCtrl.log()">{{loginCtrl.crear2}}
+    </button>
+  </div>
+</div>

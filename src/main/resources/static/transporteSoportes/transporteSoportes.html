@@ -1,0 +1,104 @@
+<div class="container">
+
+    <div class="caption"
+         style="text-align: center">
+        <h2>Gestión transporte de soportes</h2>
+    </div>
+    <table class="table table-responsive table-bordered"
+           style="max-width: 1240px; margin: auto;">
+        <tr>
+            <th></th>
+            <th>Fecha</th>
+            <th>Responsable recepción</th>
+            <th>Responsable emisión</th>
+            <th>Medio de transporte</th>
+            <th>Nombre soporte</th>
+
+        </tr>
+        <tr ng-repeat="supportES in transporteSoportesCtrl.supportsES">
+            <td>
+                <button class="btn btn-danger"
+                        ng-click="transporteSoportesCtrl.delete(supportES)">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+            </td>
+            <td>{{supportES.date}}</td>
+            <td>{{supportES.receivingResponsible}}</td>
+            <td>{{supportES.deliveryResponsible}}</td>
+            <td>{{supportES.shippingWay}}</td>
+            <td style="color:CornflowerBlue;">{{supportES.support.name}}</td>
+
+        </tr>
+    </table>
+    <br>
+    <div class="caption"
+         style="text-align: center">
+        <h3>Crear nuevo traslado</h3>
+    </div>
+
+    <div class="container">
+        <form name="registro" ng-submit="transporteSoportesCtrl.submit()">
+
+            <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3"
+                 style="text-align: center"><h3>Nombre del soporte </h3>
+                <input type="text" name="nombre"
+                       ng-model="transporteSoportesCtrl.nombree" required
+                       class="form-control">
+            </div>
+            <div class="caption col-md-12" style="text-align: center">
+                <p style="color:CornflowerBlue;"> El nombre del soporte debe estar
+                    registrado</p>
+            </div>
+
+            <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3"
+                 style="text-align: center"><h3>Tipo de información </h3>
+                <input type="text" name="tipoInformacion"
+                       ng-model="transporteSoportesCtrl.tipoInformacion" required
+                       class="form-control">
+            </div>
+            <br>
+
+            <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3"
+                 style="text-align: center"><h3>Emisor</h3>
+                <input type="text" name="emisor"
+                       ng-model="transporteSoportesCtrl.emisor" required
+                       class="form-control">
+            </div>
+            <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3"
+                 style="text-align: center"><h3>Responsable de la emisión</h3>
+                <input type="text" name="responsableEmision"
+                       ng-model="transporteSoportesCtrl.responsableEmision" required
+                       class="form-control">
+            </div>
+            <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3"
+                 style="text-align: center"><h3>Responsable de la emisión</h3>
+                <input type="text" name="receptor"
+                       ng-model="transporteSoportesCtrl.receptor" required
+                       class="form-control">
+            </div>
+            <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3"
+                 style="text-align: center"><h3>Responsable de la emisión</h3>
+                <input type="text" name="responsableRecepcion"
+                       ng-model="transporteSoportesCtrl.responsableRecepcion"
+                       required class="form-control">
+            </div>
+            <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3"
+                 style="text-align: center"><h3>Forma de envío</h3>
+                <input type="text" name="formaDeEnvio"
+                       ng-model="transporteSoportesCtrl.formaDeEnvio"
+                       required class="form-control">
+            </div>
+
+            <div class="caption col-md-12" style="text-align: center">
+                <br>
+                <button
+                        class="btn btn-primary"
+                        ng-click="transporteSoportesCtrl.crearSoporteES()"
+                        ng-disabled="registro.$invalid || transporteSoportesCtrl.esta()">
+                    Registrar traslado
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>

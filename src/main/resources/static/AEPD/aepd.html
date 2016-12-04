@@ -1,0 +1,396 @@
+<div class="container" c>
+<h2 class="text-center"> Alta de ficheros en la AEPD </h2>
+
+  <form name="alta" ng-submit="aepdCtrl.submit()">
+    <!-- Datos Persona Fisica -->
+    <ng-switch on="registroCtrl.mostrar">
+
+      <ng-form name="personaFisica">
+        <div ng-if="aepdCtrl.mostrar == 0">
+          <div  class="col-md-6 col-lt-6 ">
+            <h3 class="text-left"> Persona física declarante </h3>
+
+            <!-- RAZON SOCIAL -->
+            <h4 class="text-center"> Razón social</h4>
+            <input type="text"
+                   ng-model="aepdCtrl.razonSocial"
+                   class="form-control"
+                   required
+                   ng-maxlength="140"
+                   ng-minlength="140"
+                   aria-label="...">
+            <!-- CIF-->
+            <h4 class="text-center"> CIF</h4>
+            <input type="text"
+                   ng-model="aepdCtrl.cif"
+                   class="form-control"
+                   required
+                   ng-maxlength="140"
+                   ng-minlength="140"
+                   aria-label="...">
+            <!-- NOMBRE -->
+            <h4 class="text-center"> Nombre</h4>
+            <input type="text"
+                   ng-model="aepdCtrl.nombre"
+                   class="form-control"
+                   required
+                   ng-maxlength="35"
+                   ng-minlength="1"
+                   aria-label="...">
+            <!-- PRIMER APELLIDO -->
+            <h4 class="text-center"> 1 ͤ ʳ Apellido</h4>
+            <input type="text"
+                   ng-model="aepdCtrl.apellido1"
+                   class="form-control"
+                   required
+                   ng-maxlength="35"
+                   ng-minlength="1"
+                   aria-label="...">
+            <!-- SEGUNDO APELLIDO -->
+            <h4 class="text-center"> 2º Apellido </h4>
+            <input type="text"
+                   ng-model="aepdCtrl.apellido2"
+                   class="form-control"
+                   required
+                   ng-maxlength="35"
+                   ng-minlength="0"
+                   aria-label="...">
+            <h4 class="text-center"> NIF</h4>
+            <input type="text"
+                   ng-model="aepdCtrl.nif"
+                   class="form-control"
+                   required
+                   ng-maxlength="9"
+                   ng-minlength="1"
+                   aria-label="...">
+            <h4 class="text-center"> Cargo o Condición del declarante</h4>
+            <input type="text"
+                   ng-model="aepdCtrl.cargo"
+                   class="form-control"
+                   required
+                   ng-maxlength="70"
+                   ng-minlength="1"
+                   aria-label="...">
+            <br>
+
+          </div>
+
+
+          <!-- Parte de la derecha -->
+          <div  class="col-md-6 col-lt-6 ">
+            <h3 class="text-left"> Dirección de notificación</h3>
+
+
+            <!-- Código Postal -->
+            <h4 class="text-center"> Dirección postal</h4>
+            <input type="text"
+                   ng-model="aepdCtrl.direccionPostal"
+                   class="form-control"
+                   required
+                   ng-maxlength="100"
+                   ng-minlength="1"
+                   aria-label="...">
+            <!-- País -->
+
+
+            <!--  LOCALIDAD -->
+            <h4 class="text-center"> Localidad </h4>
+            <input type="text"
+                   ng-model="aepdCtrl.localidad"
+                   class="form-control"
+                   required
+                   ng-maxlength="50"
+                   ng-minlength="1"
+                   aria-label="...">
+
+            <!-- CODIGO POSTAL -->
+            <h4 class="text-center"> Código Postal</h4>
+            <input type="text"
+                   ng-model="aepdCtrl.codigoPostal"
+                   class="form-control"
+                   required
+                   ng-maxlength="5"
+                   ng-minlength="5"
+                   aria-label="...">
+
+            <!-- TELEFONO -->
+            <h4 class="text-center"> Teléfono</h4>
+            <input type="number"
+                   ng-model="aepdCtrl.telefono"
+                   class="form-control"
+                   required
+                   ng-maxlength="9"
+                   ng-minlength="9"
+                   aria-label="...">
+
+            <!-- FAX -->
+            <h4 class="text-center"> Fax</h4>
+            <input type="number"
+                   ng-model="aepdCtrl.fax"
+                   class="form-control"
+                   required
+                   ng-maxlength="9"
+                   ng-minlength="9"
+                   aria-label="...">
+
+            <!-- E-MAIL -->
+            <h4 class="text-center"> E-mail</h4>
+            <input type="email"
+                   ng-model="aepdCtrl.email"
+                   class="form-control"
+                   required
+                   ng-maxlength="70"
+                   ng-minlength="1"
+                   aria-label="...">
+
+            <!-- DIRECCIÓN ELECTRONICA -->
+            <h4 class="text-center"> Dirección electrónica del servicio de notificaciones</h4>
+            <input type="text"
+                   ng-model="aepdCtrl.direccionElectronica"
+                   class="form-control"
+                   required
+                   ng-maxlength="70"
+                   ng-minlength="1"
+                   aria-label="...">
+            <br>
+          </div>
+
+          <div style="text-align:center;">
+            <h4 class="text-center"> Denominación conocida a efectos postales</h4>
+            <input type="text"
+                   ng-model="aepdCtrl.denominacion"
+                   class="form-control"
+                   required
+                   ng-maxlength="70"
+                   ng-minlength="1"
+                   aria-label="...">
+            <br>
+            <button
+              class="btn btn-primary"
+              ng-click="aepdCtrl.declaracion()">Declaración
+              <!-- ng-disabled="registro.identificacion.$invalid" -->
+            </button>
+          </div>
+        </div>
+
+      </ng-form>
+      <ng-form name="responsableFichero">
+        <div ng-if="aepdCtrl.mostrar == 1">
+          <h3 class="text-center"> Responsable Fichero</h3>
+          <div  class="col-md-6 col-lt-6 ">
+            <!-- CIF -->
+            <h4 class="text-center"> CIF del responsable</h4>
+            <input type="text"
+                   ng-model="aepdCtrl.cifResponsable"
+                   class="form-control"
+                   required
+                   ng-maxlength="140"
+                   ng-minlength="140"
+                   aria-label="...">
+
+            <!-- Código Postal del responsable-->
+            <h4 class="text-center"> Dirección postal del responsable</h4>
+            <input type="text"
+                   ng-model="aepdCtrl.direccionPostalResponsable"
+                   class="form-control"
+                   required
+                   ng-maxlength="100"
+                   ng-minlength="1"
+                   aria-label="...">
+
+
+            <!-- Localidad del responsable -->
+            <h4 class="text-center"> Localidad del responsable</h4>
+            <input type="text"
+                   ng-model="aepdCtrl.localidadResponsable"
+                   class="form-control"
+                   required
+                   ng-maxlength="50"
+                   ng-minlength="1"
+                   aria-label="...">
+
+            <!-- Provincia del responsable -->
+            <h4 class="text-center"> Provincia del responsable</h4>
+            <input type="text"
+                   ng-model="aepdCtrl.provinciaResponsable"
+                   class="form-control"
+                   required
+                   ng-maxlength="50"
+                   ng-minlength="1"
+                   aria-label="...">
+
+
+
+          </div>
+          <div  class="col-md-6 col-lt-6 ">
+            <!-- Fax del responsable -->
+            <h4 class="text-center"> Email del responsable</h4>
+            <input type="email"
+                   ng-model="aepdCtrl.emailResponsable"
+                   class="form-control"
+                   required
+                   ng-maxlength="50"
+                   ng-minlength="1"
+                   aria-label="...">
+            <!-- Telefono del responsable -->
+            <h4 class="text-center"> Teléfono del responsable</h4>
+            <input type="text"
+                   ng-model="aepdCtrl.telefonoResponsable"
+                   class="form-control"
+                   required
+                   ng-maxlength="50"
+                   ng-minlength="1"
+                   aria-label="...">
+            <!-- Fax del responsable -->
+            <h4 class="text-center"> Fax del responsable</h4>
+            <input type="text"
+                   ng-model="aepdCtrl.faxResponsable"
+                   class="form-control"
+                   required
+                   ng-maxlength="50"
+                   ng-minlength="1"
+                   aria-label="...">
+            <!-- País del responsable -->
+            <h4 class="text-center"> País del responsable</h4>
+            <input type="text"
+                   ng-model="aepdCtrl.paisResponsable"
+                   class="form-control"
+                   required
+                   ng-maxlength="50"
+                   ng-minlength="1"
+                   aria-label="...">
+
+            <br>
+          </div>
+          <div style="text-align:center;">
+            <h4 class="text-center"> Nombre y Apellidos Razón social los responsables del fichero</h4>
+            <input type="text"
+                   ng-model="aepdCtrl.NombreApellidosResponsable"
+                   class="form-control"
+                   required
+                   ng-maxlength="50"
+                   ng-minlength="1"
+                   aria-label="...">
+            <br>
+            <button
+              class="btn btn-primary"
+              ng-click="aepdCtrl.derechos()"> Derechos
+              <!-- ng-disabled="registro.identificacion.$invalid" -->
+            </button>
+          </div>
+        </div>
+
+
+      </ng-form>
+      <ng-form name="derechos">
+        <div ng-if="aepdCtrl.mostrar == 2">
+          <h3 class="text-center"> Derechos de oposición, rectificación y cancelación</h3>
+          <div  class="col-md-6 col-lt-6 ">
+            <!-- CIF -->
+            <h4 class="text-center"> Nombre de la oficina</h4>
+            <input type="text"
+                   ng-model="aepdCtrl.oficinaDerecho"
+                   class="form-control"
+                   required
+                   ng-maxlength="70"
+                   ng-minlength="0"
+                   aria-label="...">
+
+            <h4 class="text-center"> NIF o CIF de la oficina de Acceso</h4>
+            <input type="text"
+                   ng-model="aepdCtrl.cifDerecho"
+                   class="form-control"
+                   required
+                   ng-maxlength="9"
+                   ng-minlength="0"
+                   aria-label="...">
+
+
+            <h4 class="text-center"> Dirección postal</h4>
+            <input type="text"
+                   ng-model="aepdCtrl.direccionPostalDerecho"
+                   class="form-control"
+                   required
+                   ng-maxlength="100"
+                   ng-minlength="0"
+                   aria-label="...">
+            <h4 class="text-center"> Localidad </h4>
+            <input type="text"
+                   ng-model="aepdCtrl.localidadDerecho"
+                   class="form-control"
+                   required
+                   ng-maxlength="100"
+                   ng-minlength="0"
+                   aria-label="...">
+
+            <h4 class="text-center"> Código Postal </h4>
+            <input type="text"
+                   ng-model="aepdCtrl.codigoPostalDerecho"
+                   class="form-control"
+                   required
+                   ng-maxlength="5"
+                   ng-minlength="5"
+                   aria-label="...">
+          </div>
+          <div  class="col-md-6 col-lt-6 ">
+            <h4 class="text-center"> Provincia</h4>
+            <input type="number"
+                   ng-model="aepdCtrl.provinciaDerecho"
+                   class="form-control"
+                   required
+                   ng-maxlength="2"
+                   ng-minlength="2"
+                   aria-label="...">
+
+            <h4 class="text-center"> País</h4>
+            <input type="number"
+                   ng-model="aepdCtrl.paisDerecho"
+                   class="form-control"
+                   required
+                   ng-maxlength="2"
+                   ng-minlength="2"
+                   aria-label="...">
+
+            <h4 class="text-center"> Teléfono</h4>
+            <input type="number"
+                   ng-model="aepdCtrl.telefonoDerecho"
+                   class="form-control"
+                   required
+                   min="100000000"
+                   max="999999999"
+                   ng-maxlength="9"
+                   ng-minlength="9"
+                   aria-label="...">
+            <h4 class="text-center"> Fax</h4>
+            <input type="number"
+                   ng-model="aepdCtrl.faxDerecho"
+                   class="form-control"
+                   required
+                   min="100000000"
+                   max="999999999"
+                   ng-maxlength="9"
+                   ng-minlength="9"
+                   aria-label="...">
+            <h4 class="text-center"> E-mail</h4>
+            <input type="email"
+                   ng-model="aepdCtrl.emailDerecho"
+                   class="form-control"
+                   required
+                   ng-maxlength="70"
+                   ng-minlength="0"
+                   aria-label="...">
+            <br>
+          </div>
+          <div style="text-align:center;">
+            <button
+              class="btn btn-primary"
+              ng-click="aepdCtrl.volverDeclaracion()">Inicio alta ficheros
+              <!-- ng-disabled="registro.identificacion.$invalid" -->
+            </button>
+          </div>
+        </div>
+
+      </ng-form>
+    </ng-switch>
+  </form>
+</div>

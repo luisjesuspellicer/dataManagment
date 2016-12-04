@@ -1,0 +1,196 @@
+<div class="container">
+
+    <div class="caption"
+         style="text-align: center">
+        <h3>Sujeto {{controlSujetoCtrl.personalCode}} </h3>
+        <br>
+    </div>
+    <div align="center" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <button
+                ng-click="controlSujetoCtrl.lineaBase()"
+                class="btn btn-primary">Crear Linea Base
+        </button>
+        <br>
+    </div>
+    <div align="center" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <br>
+        <button
+                ng-click="controlSujetoCtrl.mostrarFichero()"
+                class="btn btn-primary">{{controlSujetoCtrl.fich}}
+        </button>
+        <br>
+    </div>
+
+    <div align="center" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <br>
+        <div class="btn-group ">
+            <button type="button" class="btn btn-primary">Nuevo Test</button>
+            <button type="button" class="btn btn-primary dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+                <div ng-repeat="test in controlSujetoCtrl.tests  track by $index">
+                    <li><a ng-click="controlSujetoCtrl.redirigirTest($index)">{{test.nombre}}</a></li>
+                </div>
+            </ul>
+        </div>
+    </div>
+    <div align="center" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <br>
+        <div class="btn-group ">
+            <button type="button" class="btn btn-primary"
+                    ng-click="controlSujetoCtrl.noMostrarTest()"
+                    ng-disabled="controlSujetoCtrl.noHayTests()">Resultados tests
+            </button>
+            <button type="button" class="btn btn-primary dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                    ng-disabled="controlSujetoCtrl.noHayTests()">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+                <div ng-repeat="test in controlSujetoCtrl.testsResueltos  track by $index">
+                    <li><a ng-click="controlSujetoCtrl.mostrarTest(test)">{{test.test_id_resolution.id}}</a></li>
+                </div>
+            </ul>
+        </div>
+        <br>
+        <br>
+    </div>
+    <div align="center" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+        <div class="btn-group ">
+            <button type="button" class="btn btn-primary"
+                    ng-click="controlSujetoCtrl.noMostrarTest()"
+                    ng-disabled="controlSujetoCtrl.noHayActividades()">Actividades
+            </button>
+            <button type="button" class="btn btn-primary dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                    ng-disabled="controlSujetoCtrl.noHayActividades()">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+                <div ng-repeat="actividad in controlSujetoCtrl.actividades  track by $index">
+                    <li><a ng-click="controlSujetoCtrl.mostrarActividad(actividad)">{{actividad.id}}</a></li>
+                </div>
+            </ul>
+        </div>
+        <br>
+        <br>
+    </div>
+    <br>
+    <br>
+    <div ng-if="controlSujetoCtrl.mostrar == 3" align="center" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <form name="fi" method="POST" enctype="multipart/form-data" action="{{controlSujetoCtrl.s}}">
+            <table class="table table-responsive table-bordered"
+                   style="max-width: 1240px; margin: auto;">
+                <tr>
+                    <td>Ficheros</td>
+                    <td>Operaciones</td>
+                </tr>
+                <tr>
+
+                    <td>
+                        <label class="btn btn-primary btn-file">
+                            <span class="glyphicon glyphicon-search"></span>
+                            Buscar fichero
+                            <input type="file"
+                                   name="file"
+                                   required
+                                   style="display: none;"/>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="btn btn-primary btn-file">
+                            <span class="glyphicon glyphicon-cloud-upload"></span>
+                            Subir fichero
+                            <input type="submit"
+                                   ng-disabled="fi.$invalid"
+                                   value="Insertar">
+                        </label>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <br>
+        <form name="fi2" method="GET">
+            <table class="table table-responsive table-bordered"
+                   style="max-width: 1240px; margin: auto;">
+                <tr ng-repeat="fichero in controlSujetoCtrl.ficheros">
+                    <td>{{fichero.nameFile}}</td>
+                    <td>
+                        <button ng-if="controlSujetoCtrl.canDelete()" class="btn btn-danger"
+                                ng-click="controlSujetoCtrl.deleteFichero(fichero)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                        <a class="btn btn-primary"
+                           ng-click="controlSujetoCtrl.download(fichero)">
+                            <span class="glyphicon glyphicon-cloud-download"></span>
+                        </a>
+
+                    </td>
+
+                </tr>
+            </table>
+        </form>
+    </div>
+    <table ng-if="controlSujetoCtrl.mostrar == 1" class="table table-responsive table-bordered"
+           style="max-width: 1240px; margin: auto;">
+        <tr>
+            <th>Serie</th>
+            <th colspan="2">Nº</th>
+            <th colspan="2">Letras</th>
+            <th colspan="2">Total</th>
+            <th colspan="2">Puntuacion</th>
+        </tr>
+        <tr ng-repeat="serie in controlSujetoCtrl.series track by $index">
+
+            <td>{{serie.sequence}}</td>
+            <td>{{serie.numberOfNumbers}}</td>
+            <td>{{controlSujetoCtrl.solutions[$index].numberOfNumbers}}</td>
+            <td>{{serie.numberOfLetters}}</td>
+            <td>{{controlSujetoCtrl.solutions[$index].numberOfLetters}}</td>
+            <td>{{serie.total}}</td>
+            <td>{{controlSujetoCtrl.solutions[$index].total}}</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <table ng-if="controlSujetoCtrl.mostrar == 2" class="table table-responsive table-bordered"
+           style="max-width: 1240px; margin: auto;">
+        <tr>
+            <th>Tipo de actividad</th>
+            <th>Sujeto</th>
+            <th>Incidencias</th>
+            <th>Tiempo Inicial</th>
+            <th>Tiempo Final</th>
+        </tr>
+        <tr ng-repeat="milestone in controlSujetoCtrl.milestones track by $index">
+
+            <td>{{milestone.activities.typeActivity}} {{milestone.activities.description}}</td>
+            <td>{{milestone.numSubject.personalCode}}</td>
+            <td>{{milestone.incidents}}</td>
+            <td style="color:CornflowerBlue;">
+                {{milestone.initialHour}}:
+                {{milestone.initialMinute}}:
+                {{milestone.initialSecond}}:
+                {{milestone.initialMillisecond}}
+            </td>
+            <td style="color:CornflowerBlue;">
+                {{milestone.finalHour}}:
+                {{milestone.finalMinute}}:
+                {{milestone.finalSecond}}:
+                {{milestone.finalMillisecond}}
+            </td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <div class="container">
+
+        <br>
+    </div>
+</div>

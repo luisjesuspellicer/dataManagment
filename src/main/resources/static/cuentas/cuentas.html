@@ -1,0 +1,86 @@
+<div class="container">
+
+<div class="caption"
+     style="text-align: center">
+  <h2>Usuarios</h2>
+</div>
+<table class="table table-responsive table-bordered" style="max-width: 1240px; margin: auto;">
+  <tr>
+    <th></th>
+    <th>Nombre de usuario</th>
+    <th>Email</th>
+    <th>Roles</th>
+  </tr>
+  <tr ng-repeat="user in cuentasCtrl.users">
+    <td>
+      <button ng-if="cuentasCtrl.canDelete(user)" class="btn btn-danger"
+              ng-click="cuentasCtrl.delete(user)">
+        <span class="glyphicon glyphicon-trash"></span>
+      </button>
+      <a class="btn btn-primary" ng-click="cuentasCtrl.perfil(user)">
+        <span class="glyphicon glyphicon-pencil"></span>
+      </a>
+    </td>
+    <td>{{user.userName}}</td>
+    <td style="color:CornflowerBlue;">{{user.email}}</td>
+    <td>{{user.privileges}}</td>
+  </tr>
+</table>
+<br>
+    <div class="caption"
+         style="text-align: center">
+      <h3>Crear nuevo usuario</h3>
+    </div>
+
+    <div class="container">
+      <form name="registro" ng-submit="cuentasCtrl.submit()">
+        <div class="caption" style="text-align: center">  <h2>{{loginCtrl.crear}} </h2></div>
+        <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3" style="text-align: center">  <h3>Usuario </h3>
+          <input type="text"  name="userName"  ng-model="cuentasCtrl.userName" required class="form-control">
+        </div>
+        <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3" style="text-align: center">  <h3>Contraseña </h3>
+          <input type="password"
+                 name="password"
+                 ng-model="cuentasCtrl.password"
+                 required
+                 ng-disabled="cuentasCtrl.modificar == true"
+                 minlength="8"
+                 class="form-control">
+        </div>
+        <br>
+        <p> Las contraseñas deben coincidir, tener como mínimo 8 digitos y además de letras mayúsculas y minúsculas, debe contener números.</p>
+        <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3" style="text-align: center">  <h3>Repetir Contraseña </h3>
+          <input type="password"
+                 name="password2"
+                 ng-model="cuentasCtrl.password2"
+
+                 required class="form-control"
+                minlength="8">
+        </div>
+        <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3" style="text-align: center">  <h3>Correo Electrónico </h3>
+          <input type="email"  name="email" ng-model="cuentasCtrl.email" required class="form-control">
+        </div>
+        <div ng-if="cuentasCtrl.notAvailablee()" class="caption col-md-12" style="text-align: center">
+          <p style="color:CornflowerBlue;"> Nombre de usuario no disponible.</p>
+          </div>
+        <div ng-if="cuentasCtrl.dif()" class="caption col-md-12" style="text-align: center">
+          <p style="color:CornflowerBlue;" >Las contraseñas no coinciden.</p>
+        </div>
+        <div ng-if="cuentasCtrl.weak()" class="caption col-md-12" style="text-align: center">
+          <p style="color:CornflowerBlue;"> La contraseña no cumple con los requisitos.</p>
+        </div>
+        <div class="caption col-md-12" style="text-align: center">
+          <br>
+          <button
+                  ng-if="cuentasCtrl.canDelete(user)"
+                  class="btn btn-primary"
+                  ng-click="cuentasCtrl.crearUsuario()"
+                  ng-disable="registro.$invalid">
+            <span class="glyphicon glyphicon-user"></span>
+            Crear usuario
+          </button>
+
+        </div>
+      </form>
+    </div>
+</div>

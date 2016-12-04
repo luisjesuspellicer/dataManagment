@@ -1,0 +1,335 @@
+<div class="container">
+
+    <div ng-if="lineaBaseCtrl.numSujetos" class="caption"
+         style="text-align: center">
+        <h2>Actividades</h2>
+        <br>
+    </div>
+    <div ng-if="lineaBaseCtrl.mostrar4()" align="center" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <br>
+        <div class="btn-group ">
+            <button type="button" class="btn btn-primary">Elegir segundo sujeto</button>
+            <button type="button" class="btn btn-primary dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+                <div ng-repeat="subject in lineaBaseCtrl.sujetos  track by $index">
+                    <li><a ng-click="lineaBaseCtrl.segundoSujeto(subject)">{{subject.personalCode}}</a></li>
+                </div>
+            </ul>
+        </div>
+    </div>
+    <div ng-if="lineaBaseCtrl.mostrar2()" align="center" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <br>
+        <div align="center" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <button
+                    ng-click="lineaBaseCtrl.confirmar()"
+                    ng-disabled="lineaBaseCtrl.second"
+                    class="btn btn-primary">Aceptar
+            </button>
+            <br>
+        </div>
+    </div>
+    <table ng-if="lineaBaseCtrl.mostrar3()" class="table table-responsive table-bordered"
+           style="max-width: 1240px; margin: auto;">
+        <tr>
+            <th></th>
+            <th>Tipo de actividad</th>
+            <th>Sujeto</th>
+            <th>Incidencias</th>
+            <th>Tiempo Inicial</th>
+            <th>Tiempo Final</th>
+        </tr>
+        <tr ng-repeat="milestone in lineaBaseCtrl.milestones track by $index">
+            <td>
+                <button class="btn btn-danger"
+                        ng-click="lineaBaseCtrl.deletee($index)">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+            </td>
+            <td>{{milestone.activities.typeActivity}} {{milestone.activities.description}}</td>
+            <td>{{milestone.numSubject.personalCode}}</td>
+            <td>{{milestone.incidents}}</td>
+            <td style="color:CornflowerBlue;">
+                {{milestone.initialHour}}:
+                {{milestone.initialMinute}}:
+                {{milestone.initialSecond}}:
+                {{milestone.initialMillisecond}}
+            </td>
+            <td style="color:CornflowerBlue;">
+                {{milestone.finalHour}}:
+                {{milestone.finalMinute}}:
+                {{milestone.finalSecond}}:
+                {{milestone.finalMillisecond}}
+            </td>
+        </tr>
+    </table>
+    <br>
+    <div ng-if="!lineaBaseCtrl.numSujetos" class="caption"
+         style="text-align: center">
+        <h2>Numero de sujetos en la actividad</h2>
+        <br>
+    </div>
+    <div ng-if="!lineaBaseCtrl.numSujetos" class="caption"
+         style="text-align: center">
+        <div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lt-6 ">
+                <input
+                        checked
+                        required
+                        type="radio"
+                        name="genero"
+                        ng-model="lineaBaseCtrl.numSuj"
+                        value="1"
+                > 1<br>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lt-6">
+                <input
+                        required
+                        type="radio"
+                        name="genero"
+                        ng-model="lineaBaseCtrl.numSuj"
+                        value="2"
+                        style="align: right"> 2<br>
+            </div>
+            <br>
+            <br>
+        </div>
+        <br>
+        <div align="center" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <button
+                    ng-click="lineaBaseCtrl.eleccion()"
+                    class="btn btn-primary">Aceptar
+            </button>
+            <br>
+        </div>
+    </div>
+    <div ng-if="lineaBaseCtrl.mostrar3()" class="caption"
+         style="text-align: center">
+        <h3>Actividades</h3>
+    </div>
+    <div class="container">
+        <form name="registro">
+            <div ng-if="lineaBaseCtrl.mostrar3()"
+                 class="caption col-md-6 col-lg-6"
+                 style="text-align: center">
+                <h3>Elegir actividad</h3>
+                <input
+                        type="text"
+                        name="serie"
+                        minlength="1"
+                        disabled
+                        ng-model="lineaBaseCtrl.tipoActividad.description"
+                        required class="form-control">
+                <br>
+                <div class="btn-group ">
+                    <button type="button" class="btn btn-primary">actividades</button>
+                    <button type="button" class="btn btn-primary dropdown-toggle"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <div ng-repeat="actividad in lineaBaseCtrl.actividades  track by $index">
+                            <li><a ng-click="lineaBaseCtrl.elegirActividad(actividad)">{{actividad.typeActivity}}
+                                {{actividad.description}}</a></li>
+                        </div>
+                    </ul>
+                </div>
+                <br>
+            </div>
+
+            <div ng-if="lineaBaseCtrl.mostrar3()"
+                 class="caption col-md-6 col-lg-6"
+                 style="text-align: center">
+
+                <h3>Elegir sujeto</h3>
+                <input
+                        type="text"
+                        name="serie"
+                        minlength="1"
+                        disabled
+                        ng-model="lineaBaseCtrl.sujetoElegido.personalCode"
+                        required class="form-control">
+                <br>
+                <div class="btn-group ">
+                    <button ng-disabled="lineaBaseCtrl.noSujetos" type="button" class="btn btn-primary">sujetos</button>
+                    <button ng-disabled="lineaBaseCtrl.noSujetos" type="button" class="btn btn-primary dropdown-toggle"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <div ng-repeat="sujeto in lineaBaseCtrl.sujetos  track by $index">
+                            <li><a ng-click="lineaBaseCtrl.elegirSujeto(sujeto)">{{sujeto.personalCode}}</a></li>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+
+            <div ng-if="lineaBaseCtrl.mostrar3()"
+                 class="caption col-md-8 col-lg-8 col-lg-offset-2 col-md-offset-2"
+                 style="text-align: center">
+                <br>
+                <h3>Incidencias</h3>
+                <input
+                        type="text"
+                        name="serie"
+                        minlength="1"
+                        ng-model="lineaBaseCtrl.incidencia"
+                        class="form-control">
+                <br>
+            </div>
+            <div ng-if="lineaBaseCtrl.sujetosListos"
+                 class="caption col-md-3 col-lg-3"
+                 style="text-align: center">
+                <h4>Hora Inicial</h4>
+                <div>
+                    <input
+                            type="number"
+                            name="nombree"
+                            minlength="1"
+                            min="0"
+                            ng-model="lineaBaseCtrl.horaInicial"
+                            required class="form-control">
+                </div>
+
+            </div>
+            <div ng-if="lineaBaseCtrl.sujetosListos"
+                 class="caption col-md-3 col-lg-3"
+                 style="text-align: center">
+                <h4>Minuto Inicial</h4>
+
+                <input
+                        type="number"
+                        name="nombree"
+                        minlength="1"
+                        max="59"
+                        min="0"
+                        ng-model="lineaBaseCtrl.minutoInicial"
+                        required class="form-control">
+            </div>
+            <div ng-if="lineaBaseCtrl.sujetosListos"
+                 class="caption col-md-3 col-lg-3"
+                 style="text-align: center">
+                <h4>Segundo Inicial</h4>
+                <input
+                        type="number"
+                        name="nombree"
+                        minlength="1"
+                        max="59"
+                        min="0"
+                        ng-model="lineaBaseCtrl.segundoInicial"
+                        required class="form-control">
+            </div>
+            <div ng-if="lineaBaseCtrl.sujetosListos"
+                 class="caption col-md-3 col-lg-3"
+                 style="text-align: center">
+                <h4>Milisegundo inicial</h4>
+                <input
+                        type="number"
+                        name="nombree"
+                        minlength="1"
+                        max="99"
+                        min="0"
+                        ng-model="lineaBaseCtrl.miliSegundoInicial"
+                        required class="form-control">
+            </div>
+
+
+            <div ng-if="lineaBaseCtrl.sujetosListos"
+                 class="caption col-md-3 col-lg-3"
+                 style="text-align: center">
+                <h4>Hora Final</h4>
+                <input
+                        type="number"
+                        name="nombree"
+                        minlength="1"
+                        min="0"
+                        ng-model="lineaBaseCtrl.horaFinal"
+                        required class="form-control">
+            </div>
+            <div ng-if="lineaBaseCtrl.sujetosListos"
+                 class="caption col-md-3 col-lg-3"
+                 style="text-align: center">
+                <h4>Minuto Final</h4>
+                <input
+                        type="number"
+                        name="nombree"
+                        minlength="1"
+                        max="59"
+                        min="0"
+                        ng-model="lineaBaseCtrl.minutoFinal"
+                        required class="form-control">
+            </div>
+            <div ng-if="lineaBaseCtrl.sujetosListos"
+                 class="caption col-md-3 col-lg-3"
+                 style="text-align: center">
+                <h4>Segundo Final</h4>
+                <input
+                        type="number"
+                        name="nombree"
+                        minlength="1"
+                        max="59"
+                        min="0"
+                        ng-model="lineaBaseCtrl.segundoFinal"
+                        required class="form-control">
+            </div>
+            <div ng-if="lineaBaseCtrl.sujetosListos"
+                 class="caption col-md-3 col-lg-3"
+                 style="text-align: center">
+                <h4>Milisegundo Final</h4>
+                <input
+                        type="number"
+                        name="nombree"
+                        minlength="1"
+                        max="99"
+                        min="0"
+                        ng-model="lineaBaseCtrl.miliSegundoFinal"
+                        required class="form-control">
+            </div>
+            <div ng-if="lineaBaseCtrl.sujetosListos"
+                 class="caption col-md-12" style="text-align: center">
+                <br>
+                <button
+                        class="btn btn-primary"
+                        ng-disabled="registro.$invalid"
+                        ng-click="lineaBaseCtrl.add()"
+
+                >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Añadir actividad
+                </button>
+
+            </div>
+
+            <div ng-if="lineaBaseCtrl.sujetosListos"
+                 class="caption col-md-12" style="text-align: center">
+                <br>
+                <h3>Anotaciones</h3>
+                <input
+                        type="text"
+                        name="serie"
+                        minlength="1"
+                        ng-disabled="lineaBaseCtrl.tam()" ;
+                        ng-model="lineaBaseCtrl.anot"
+                        class="form-control">
+                <br>
+                <br>
+                <button
+                        class="btn btn-primary"
+                        ng-disabled="lineaBaseCtrl.tam()" ;
+                        ng-click="lineaBaseCtrl.enviar()"
+
+                >
+                    <span class="glyphicon glyphicon-ok"></span>
+                    Enviar
+                </button>
+
+            </div>
+
+        </form>
+    </div>
+</div>

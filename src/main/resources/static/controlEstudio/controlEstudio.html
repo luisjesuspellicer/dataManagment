@@ -1,0 +1,92 @@
+<div class="container">
+    <div align="center" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h1> Estudio {{controlEstudioCtrl.estudioo}}</h1>
+        <br>
+        <br>
+    </div>
+    <div align="center" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <button
+                ng-click="controlEstudioCtrl.registroo()"
+                class="btn btn-primary"
+                ng-disabled="controlEstudioCtrl.estudio()">Registrar un nuevo sujeto
+        </button>
+        <br>
+        <br>
+    </div>
+    <div align="center" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h2>Listado de sujetos </h2>
+        <br>
+    </div>
+    <div align="center" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h3>Filtrar por Fecha </h3>
+
+    </div>
+    <div align="center" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <h4>Fecha inicial</h4>
+        <input type="date"
+               name="dia"
+               required
+               ng-model="controlEstudioCtrl.dia"
+               class="form-control"
+               min="2014-01-01"
+               aria-label="...">
+        <br>
+    </div>
+    <div align="center" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+        <h4> Fecha final</h4>
+        <input type="date"
+               name="dia2"
+               required
+               ng-model="controlEstudioCtrl.diaFin"
+               class="form-control"
+               min="2014-01-01"
+               aria-label="...">
+        <br>
+    </div>
+    <div align="center" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+        <button
+                ng-click="controlEstudioCtrl.filtrar()"
+                class="btn btn-primary"
+                ng-disabled="controlEstudioCtrl.fechas()">Filtrar
+        </button>
+
+        <br>
+        <br>
+    </div>
+    <div ng-if="controlEstudioCtrl.filtrados" align="center"
+         class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <button
+                ng-click="controlEstudioCtrl.noFiltrar()"
+                class="btn btn-primary">No filtrar
+        </button>
+        <br>
+        <br>
+    </div>
+    <table class="table table-responsive table-bordered"
+           style="max-width: 1240px; margin: auto;">
+        <tr>
+            <th></th>
+            <th>Codigo Personal</th>
+            <th>Fecha del registro</th>
+        </tr>
+        <tr ng-repeat="sujeto in controlEstudioCtrl.sujetos">
+            <td>
+                <button ng-if="controlEstudioCtrl.canDelete()"
+                        class="btn btn-danger"
+                        ng-click="controlEstudioCtrl.deletee(sujeto)">
+                    <span ng-if="controlEstudioCtrl.canDelete()"
+                          class="glyphicon glyphicon-trash"></span>
+                </button>
+                <a class="btn btn-primary"
+                   ng-click="controlEstudioCtrl.open(sujeto)">
+                    <span class="glyphicon glyphicon-folder-open"></span>
+                </a>
+            </td>
+            <td>{{sujeto.personalCode}}</td>
+            <td>{{controlEstudioCtrl.convertirAFecha(sujeto.checkIn)}}</td>
+        </tr>
+    </table>
+
+</div>

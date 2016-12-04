@@ -1,0 +1,65 @@
+<ng-switch on="estudioCtrl.mostrarEstudio">
+    <div class="container">
+        <div class="caption" style="text-align: center">
+            <h2> Creación y Gestión de los estudios </h2>
+        </div>
+        <div ng-if="estudioCtrl.administrador()" class="container">
+            <br>
+            <div class="caption" style="text-align: center"><h3>Crear un nuevo estudio</h3></div>
+        </div>
+        <!-- Crear un nuevo estudio -->
+        <div ng-if="estudioCtrl.administrador()" class="container">
+            <div class="caption" style="text-align: center"><h4>Nombre del estudio</h4></div>
+            <input type="textarea"
+                   ng-model="estudioCtrl.nombreEstudio"
+                   class="form-control"
+                   required
+                   ng-min-length="1"
+                   aria-label="...">
+
+            <h4 class="text-center">Descripción del estudio</h4>
+            <input type="textarea"
+                   ng-model="estudioCtrl.descripcion"
+                   required
+                   ng-min-length="1"
+                   class="form-control"
+                   aria-label="...">
+            <div class="caption col-md-12" style="text-align: center">
+                <br>
+                <button type="button" class="btn btn-primary"
+                        ng-click="estudioCtrl.crear()"
+                        ng-disabled="estudioCtrl.esta()">Crear nuevo estudio
+                </button>
+            </div>
+
+        </div>
+        <div  class="container">
+            <br>
+            <div class="caption" style="text-align: center"><h3>Lista de estudios</h3></div>
+        </div>
+        <table ng-if="estudioCtrl.len()"class="table table-responsive table-bordered" style="max-width: 1240px; margin: auto;">
+            <tr>
+                <th></th>
+                <th>Nombre del estudio</th>
+                <th>Descripción</th>
+            </tr>
+            <tr ng-repeat="estudio in estudioCtrl.estudios">
+                <td>
+                    <button ng-if="estudioCtrl.administrador()" class="btn btn-danger"
+                            ng-click="estudioCtrl.deletee(estudio)">
+                        <span ng-if="estudioCtrl.administrador()" class="glyphicon glyphicon-trash"></span>
+                    </button>
+                    <a class="btn btn-primary" ng-click="estudioCtrl.open(estudio)">
+                        <span class="glyphicon glyphicon-folder-open"></span>
+                    </a>
+                </td>
+                <td>{{estudio.studyName}}</td>
+                <td>{{estudio.description}}</td>
+            </tr>
+        </table>
+
+
+    </div>
+
+
+</ng-switch>

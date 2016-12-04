@@ -1,0 +1,101 @@
+<div class="container">
+    <div class="caption"
+         style="text-align: center">
+        <h2>Nuevo test cognitivo</h2>
+    </div>
+    <table class="table table-responsive table-bordered" style="max-width: 1240px; margin: auto;">
+        <tr>
+            <th></th>
+            <th>Serie</th>
+            <th>Nº</th>
+            <th>Letras</th>
+            <th>Total</th>
+        </tr>
+        <tr ng-repeat="serie in testCognitivoCtrl.series">
+            <td>
+                <button class="btn btn-danger"
+                        ng-click="testCognitivoCtrl.deletee(serie)">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+            </td>
+            <td>{{serie.secuencia}}</td>
+            <td>{{serie.numero}}</td>
+            <td>{{serie.letras}}</td>
+            <td style="color:CornflowerBlue;">{{serie.numero + serie.letras}}</td>
+        </tr>
+    </table>
+    <br>
+    <div ng-if="testCognitivoCtrl.completo()" class="caption"
+         style="text-align: center">
+        <h3>Añadir serie</h3>
+    </div>
+    <div ng-if="!testCognitivoCtrl.completo()" class="caption"
+         style="text-align: center">
+        <h3>Crear Test</h3>
+    </div>
+    <div class="container">
+        <form name="registro">
+            <div ng-if="testCognitivoCtrl.completo()"
+                 class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3"
+                 style="text-align: center">
+                <h3>Secuencia </h3>
+                <input
+                        type="text"
+                        name="serie"
+                        minlength="1"
+                        ng-model="testCognitivoCtrl.sequence"
+                        required class="form-control">
+            </div>
+            <div ng-if="!testCognitivoCtrl.completo()"
+                 class="caption col-md-6 col-lg-6
+                 col-lg-offset-3 col-md-offset-3"
+                 style="text-align: center">
+                <h3>Nombre del test </h3>
+            </div>
+            <div ng-if="testCognitivoCtrl.completo()"
+                 class="caption col-md-12" style="text-align: center">
+                <br>
+                <button
+                        class="btn btn-primary"
+                        ng-disabled="testCognitivoCtrl.alfanumerico()"
+                        ng-click="testCognitivoCtrl.nuevaSerie()"
+                >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Añadir serie
+                </button>
+
+            </div>
+            <div ng-if="testCognitivoCtrl.completo()"
+                 class="caption col-md-12" style="text-align: center">
+
+                <p style="color:CornflowerBlue;"> Es necesario añadir solo 10 series.</p>
+            </div>
+            <div ng-if="!testCognitivoCtrl.completo()"
+                 class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3"
+                 style="text-align: center">
+                <div>
+                    <br><input
+                        type="text"
+                        name="nombree"
+                        minlength="1"
+                        ng-model="testCognitivoCtrl.nombree"
+                        required class="form-control">
+                </div>
+            </div>
+            <div ng-if="!testCognitivoCtrl.completo()"
+                 class="caption col-md-12" style="text-align: center">
+                <br>
+                <button
+                        class="btn btn-primary"
+                        ng-disabled="testCognitivoCtrl.nombre()"
+                        ng-click="testCognitivoCtrl.crearTest()"
+
+                >
+                    <span class="glyphicon glyphicon-ok"></span>
+                    Crear test
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>

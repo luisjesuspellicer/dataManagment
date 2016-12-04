@@ -1,0 +1,62 @@
+<div class="container">
+
+<div class="caption"
+     style="text-align: center">
+  <h2>Gestión Soportes</h2>
+</div>
+<table class="table table-responsive table-bordered" style="max-width: 1240px; margin: auto;">
+  <tr>
+    <th></th>
+    <th>Nombre del soporte</th>
+    <th>Tipo de información</th>
+    <th>Características</th>
+  </tr>
+  <tr ng-repeat="support in soportesCtrl.supports">
+    <td>
+      <button class="btn btn-danger"
+              ng-click="soportesCtrl.delete(support)">
+        <span class="glyphicon glyphicon-trash"></span>
+      </button>
+    </td>
+    <td>{{support.name}}</td>
+    <td style="color:CornflowerBlue;">{{support.typeInformation}}</td>
+    <td>{{support.characteristics}}</td>
+  </tr>
+</table>
+<br>
+    <div class="caption"
+         style="text-align: center">
+      <h3>Crear nuevo soporte</h3>
+    </div>
+
+    <div class="container">
+      <form name="registro" ng-submit="soportesCtrl.submit()">
+        <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3" style="text-align: center">  <h3>Nombre del soporte </h3>
+          <input type="text"
+                 ng-min-length="1" name="name"  ng-model="soportesCtrl.nombree" required class="form-control">
+        </div>
+        <div class="caption col-md-12" style="text-align: center">
+          <p style="color:CornflowerBlue;" > El nombre del soporte no debe estar registrado</p>
+        </div>
+        <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3" style="text-align: center">  <h3>Tipo de información </h3>
+          <input type="text"  ng-min-length="1" name="tipoInformacion"  ng-model="soportesCtrl.tipoInformacion" required class="form-control">
+        </div>
+        <br>
+
+        <div class="caption col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3" style="text-align: center">  <h3>Características </h3>
+          <input type="text"  ng-min-length="1" name="caracteristicas"  ng-model="soportesCtrl.caracteristicas" required class="form-control">
+        </div>
+
+        <div class="caption col-md-12" style="text-align: center">
+          <br>
+          <button
+                  class="btn btn-primary"
+                  ng-click="soportesCtrl.crearSoporte()"
+                  ng-disabled="soportesCtrl.esta()">
+            Crear soporte
+          </button>
+
+        </div>
+      </form>
+    </div>
+</div>
